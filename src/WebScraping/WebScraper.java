@@ -28,23 +28,17 @@ public class WebScraper {
       String title = doc.title();
       System.out.println("title: " + title);
       
-      // get all links in page
-      Elements links = doc.select("a[href~=(mailto:)[a-z|A-Z|0-9|.|@]+]");
+      // get all email links in page
+      Elements links = doc.select("a[href~=(mailto:)[a-z|A-Z|0-9|.|@]+]"); //simple regex matching for email ids
       try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-              new FileOutputStream("links.txt"), "utf-8"))) 
+              new FileOutputStream("links.txt"), "utf-8"))) // writes (or creates if not found) to file links.txt in working directory
       {
               for (Element link : links) 
       {
-        // get the value from the href attribute
-        //writer.write("\nlink: " + link.attr("href") + "\n");
+        //Write email ids to file line by line
         writer.write("\nEmail: " + link.text() + "\n" );
       }
       }
-      /*for (Element link : links) {
-        // get the value from the href attribute
-        System.out.println("\nlink: " + link.attr("href"));
-        System.out.println("text: " + link.text());
-      } */
     } catch (IOException e) {
     e.printStackTrace();
     }
