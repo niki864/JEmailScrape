@@ -13,7 +13,7 @@ public class WebScraper {
   public static void main(String[] args) {
     try {
       // fetch the document over HTTP
-    	URL url = new URL("http://wagner.nyu.edu/faculty/directory");
+    	URL url = new URL("http://wagner.nyu.edu/faculty/directory"); //INSERT LINK TO SCRAPE EMAIL ID FROM
     	HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
     	String line = null;
     	StringBuilder tmp = new StringBuilder();
