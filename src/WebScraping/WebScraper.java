@@ -13,7 +13,7 @@ public class WebScraper {
   public static void main(String[] args) {
     try {
       // fetch the document over HTTP
-    	URL url = new URL("http://www.nitt.edu/");
+    	URL url = new URL("http://wagner.nyu.edu/faculty/directory");
     	HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
     	String line = null;
     	StringBuilder tmp = new StringBuilder();
@@ -29,15 +29,15 @@ public class WebScraper {
       System.out.println("title: " + title);
       
       // get all links in page
-      Elements links = doc.select("a[href]");
+      Elements links = doc.select("a[href~=(mailto:)[a-z|A-Z|0-9|.|@]+]");
       try (Writer writer = new BufferedWriter(new OutputStreamWriter(
               new FileOutputStream("links.txt"), "utf-8"))) 
       {
               for (Element link : links) 
       {
         // get the value from the href attribute
-        writer.write("\nlink: " + link.attr("href") + "\n");
-        writer.write("\ntext: " + link.text() + "\n" );
+        //writer.write("\nlink: " + link.attr("href") + "\n");
+        writer.write("\nEmail: " + link.text() + "\n" );
       }
       }
       /*for (Element link : links) {
