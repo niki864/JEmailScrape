@@ -30,11 +30,21 @@ public class WebScraper {
       
       // get all links in page
       Elements links = doc.select("a[href]");
-      for (Element link : links) {
+      try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+              new FileOutputStream("links.txt"), "utf-8"))) 
+      {
+              for (Element link : links) 
+      {
+        // get the value from the href attribute
+        writer.write("\nlink: " + link.attr("href") + "\n");
+        writer.write("\ntext: " + link.text() + "\n" );
+      }
+      }
+      /*for (Element link : links) {
         // get the value from the href attribute
         System.out.println("\nlink: " + link.attr("href"));
         System.out.println("text: " + link.text());
-      }
+      } */
     } catch (IOException e) {
     e.printStackTrace();
     }
