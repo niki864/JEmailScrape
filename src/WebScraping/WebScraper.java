@@ -9,13 +9,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+//Pass link to scrape data from as arguments to main function
  
 public class WebScraper {
  
   public static void main(String[] args) {
     try {
       // fetch the document over HTTP
-    	URL url = new URL("http://www.cse.ust.hk/~quan/"); //INSERT LINK TO SCRAPE EMAIL ID FROM
+    	URL url = new URL(args[0]); 
     	HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
     	String line = null;
     	StringBuilder tmp = new StringBuilder();
@@ -62,9 +64,11 @@ public class WebScraper {
          String group4 = m.group(7);
          if(group4.equals(null)||group4.equals(" ")){	 
         	 writer.write("\nEmail: " + group1 +"@"+ group2 + "." + group3 +"\n" );
+        	 System.out.println("\nDone finding hidden links");
          }
          else{
         	 writer.write("\nEmail: " + group1 +"@"+ group2 + "." + group3 + "." + group4 +"\n" );
+        	 System.out.println("\nDone finding hidden links" );
          }
        }
       }
